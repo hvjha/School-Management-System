@@ -24,10 +24,7 @@ services:
       - key: RAZORPAY_KEY_SECRET
         sync: false
       - key: FRONTEND_URL
-        fromService:
-          type: web
-          name: school-system-frontend
-          property: host
+        value: https://school-system-frontend-qbw5.onrender.com
 
   # Frontend Service
   - type: web
@@ -36,9 +33,8 @@ services:
     plan: free
     dockerfilePath: ./frontend/Dockerfile
     dockerContext: ./frontend
+    dockerBuildArgs:
+      VITE_API_URL: https://school-system-backend-qbw5.onrender.com
     envVars:
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: school-system-backend
-          property: host # CHANGED from 'url' to 'host' to fix invalid property error
+        value: https://school-system-backend-qbw5.onrender.com

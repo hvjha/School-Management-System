@@ -4,8 +4,8 @@ services:
     name: school-system-backend
     runtime: docker
     plan: free
-    dockerFilePath: ./backend/Dockerfile
-    dockerContext: ./backend
+    dockerfilePath: ./backend/Dockerfile # Lowercase 'f'
+    dockerContext: ./backend # Lowercase 'c'
     envVars:
       - key: PORT
         value: 4000
@@ -30,8 +30,8 @@ services:
     name: school-system-frontend
     runtime: docker
     plan: free
-    dockerFilePath: ./frontend/Dockerfile
-    dockerContext: ./frontend
+    dockerfilePath: ./frontend/Dockerfile # Lowercase 'f'
+    dockerContext: ./frontend # Lowercase 'c'
     envVars:
       - key: VITE_API_URL
         fromService:

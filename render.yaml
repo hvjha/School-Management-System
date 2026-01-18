@@ -2,36 +2,39 @@ services:
   # Backend Service
   - type: web
     name: school-system-backend
-    env: node
+    runtime: docker
     plan: free
-    buildCommand: cd backend && npm install --legacy-peer-deps
-    startCommand: cd backend && node index.js
+    dockerFilePath: ./backend/Dockerfile
+    dockerContext: ./backend
     envVars:
-      - key: MONGO_URI
-        sync: false
-      - key: JWT_SECRET
-        generateValue: true
-      - key: FRONTEND_URL
-        sync: false
-      - key: CLOUDINARY_CLOUD_NAME
-        sync: false
-      - key: CLOUDINARY_API_KEY
-        sync: false
-      - key: CLOUDINARY_API_SECRET
-        sync: false
-      - key: RAZORPAY_KEY_ID
-        sync: false
-      - key: RAZORPAY_KEY_SECRET
-        sync: false
       - key: PORT
         value: 4000
+      - key: MONGO_URI
+        sync: false # Paste your mongodb+srv connection string in the dashboard
+      - key: JWT_SECERET
+        value: '#Manish#Project#Team'
+      - key: CLOUDINARY_CLOUD_NAME
+        value: dghffr4t1
+      - key: CLOUDINARY_API_KEY
+        value: 537171639812781
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: FRONTEND_URL
+        fromService:
+          type: web
+          name: school-system-frontend
+          property: host
 
   # Frontend Service
   - type: web
     name: school-system-frontend
-    env: static
-    buildCommand: cd frontend && npm install --legacy-peer-deps && npm run build
-    staticPublishPath: frontend/dist
+    runtime: docker
+    plan: free
+    dockerFilePath: ./frontend/Dockerfile
+    dockerContext: ./frontend
     envVars:
       - key: VITE_API_URL
-        sync: false
+        fromService:
+          type: web
+          name: school-system-backend
+          property: host

@@ -2,10 +2,12 @@ services:
   # Backend Service
   - type: web
     name: school-system-backend
-    runtime: docker
+    runtime: node
     plan: free
-    dockerfilePath: ./backend/Dockerfile
-    dockerContext: ./backend
+    rootContext: backend
+    buildCommand: npm install
+    startCommand: npm start
+    region: singapore
     envVars:
       - key: PORT
         value: 4000
@@ -27,14 +29,14 @@ services:
         value: https://school-system-frontend-qbw5.onrender.com
 
   # Frontend Service
-  - type: web
+  - type: static
     name: school-system-frontend
-    runtime: docker
+    runtime: static
     plan: free
-    dockerfilePath: ./frontend/Dockerfile
-    dockerContext: ./frontend
-    dockerBuildArgs:
-      VITE_API_URL: https://school-system-backend-qbw5.onrender.com
+    rootContext: frontend
+    buildCommand: npm install && npm run build
+    publishPath: dist
     envVars:
       - key: VITE_API_URL
         value: https://school-system-backend-qbw5.onrender.com
+

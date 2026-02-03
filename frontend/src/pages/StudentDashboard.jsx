@@ -131,7 +131,7 @@ export default function LoggedInStudentDashboard() {
             <div className="flex flex-col flex-wrap gap-6 mb-6 justify-center md:justify-start items-center">
               <div className="glass-card-light p-6 rounded-2xl w-64 text-center border-b-4 border-red-600 robust-inset">
                 <h3 className="text-xs font-black text-slate-500 uppercase tracking-widest">
-                  Cadet ID
+                  STUDENT ID
                 </h3>
                 <p className="text-2xl font-black mt-2 text-white">{user?.studentId || "N/A"}</p>
               </div>

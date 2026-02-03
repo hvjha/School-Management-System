@@ -4,7 +4,7 @@ services:
     name: school-system-backend
     runtime: node
     plan: free
-    rootContext: backend
+    rootDir: backend
     buildCommand: npm install
     startCommand: npm start
     region: singapore
@@ -31,11 +31,12 @@ services:
   # Frontend Service
   - type: static
     name: school-system-frontend
-    rootContext: frontend
+    rootDir: frontend
     buildCommand: npm install && npm run build
     publishPath: dist
     envVars:
       - key: VITE_API_URL
         value: https://school-system-backend-qbw5.onrender.com
+
 
 

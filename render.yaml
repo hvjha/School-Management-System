@@ -31,12 +31,11 @@ services:
   # Frontend Service
   - type: static
     name: school-system-frontend
-    runtime: static
-    plan: free
     rootContext: frontend
     buildCommand: npm install && npm run build
     publishPath: dist
     envVars:
       - key: VITE_API_URL
         value: https://school-system-backend-qbw5.onrender.com
+
 
